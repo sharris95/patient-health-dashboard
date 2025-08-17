@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tech.Care — Patient Dashboard (Jessica Taylor)</title>
+
+  <!-- Fonts & CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Chart.js + App -->
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <!-- Top header -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <img src="./assets/techcare-logo.svg" alt="Tech.Care" class="brand-img" />
+      <span class="brand-text" aria-hidden="true">Tech.Care</span>
+    </div>
+
+    <!-- Tabs with icons -->
+    <nav class="topnav" aria-label="Main">
+      <a class="topnav-link">
+        <span class="nav-ic ic-overview" aria-hidden="true"></span>
+        <span>Overview</span>
+      </a>
+      <a class="topnav-link active">
+        <span class="nav-ic ic-patients" aria-hidden="true"></span>
+        <span>Patients</span>
+      </a>
+      <a class="topnav-link">
+        <span class="nav-ic ic-schedule" aria-hidden="true"></span>
+        <span>Schedule</span>
+      </a>
+      <a class="topnav-link">
+        <span class="nav-ic ic-message" aria-hidden="true"></span>
+        <span>Message</span>
+      </a>
+      <a class="topnav-link">
+        <span class="nav-ic ic-transactions" aria-hidden="true"></span>
+        <span>Transactions</span>
+      </a>
+    </nav>
+
+    <!-- Right: avatar + doctor info + separator + two icons -->
+    <div class="topbar-user" aria-label="Signed in user">
+      <img class="user-avatar" src="./assets/girl6_1x.png" alt="User avatar" />
+      <div class="user-meta">
+        <div class="user-name">Dr. Jose Simmons</div>
+        <div class="user-role">General Practitioner</div>
+      </div>
+      <div class="user-sep" aria-hidden="true"></div>
+      <button class="plain-ic ic-gear" aria-label="Settings"></button>
+      <button class="plain-ic ic-more" aria-label="More options"></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="app-alert" class="alert" role="alert" aria-live="polite"></div>
+
+    <div class="layout">
+      <!-- LEFT: Patients roster -->
+      <section class="card patients-panel" aria-labelledby="patients-title">
+        <header class="patients-hd">
+          <h3 id="patients-title">Patients</h3>
+          <div class="dots" aria-hidden="true">⋯</div>
+        </header>
+        <ul id="roster" class="patients-list"></ul>
+      </section>
+
+      <!-- CENTER: Main -->
+      <section class="col-main">
+        <!-- Diagnosis History -->
+        <article class="card">
+          <header class="card-header">
+            <h2>Diagnosis History</h2>
+            <div class="subtle">Last 6 months</div>
+          </header>
+
+          <div class="chart-wrap">
+            <div class="chart-head">
+              <div class="chart-title">Blood Pressure</div>
+              <div class="chart-range">Last 6 months</div>
+            </div>
+
+            <canvas id="bpChart" aria-label="Blood pressure trend (last six months)"></canvas>
+
+            <ul class="legend">
+              <li>
+                <span class="dot dot-sys"></span>
+                <span class="legend-label">Systolic</span>
+                <span id="sys-current" class="legend-val"></span>
+                <span id="sys-note" class="legend-note"></span>
+              </li>
+              <li>
+                <span class="dot dot-dia"></span>
+                <span class="legend-label">Diastolic</span>
+                <span id="dia-current" class="legend-val"></span>
+                <span id="dia-note" class="legend-note"></span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Vitals -->
+          <div class="vitals3" id="vitals3"></div>
+        </article>
+
+        <!-- Diagnostic List -->
+        <article class="card">
+          <header class="card-header">
+            <h3>Diagnostic List</h3>
+          </header>
+          <div class="card-body">
+            <table class="table" id="diagnostic-table" aria-label="Diagnostic list">
+              <thead>
+                <tr>
+                  <th>Problem/Diagnosis</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- RIGHT: Profile + Labs -->
+      <aside class="col-right">
+        <article class="profile card" id="patient-card" aria-labelledby="patient-name">
+          <img id="patient-photo" class="avatar" alt="Patient profile photo" src="" />
+          <h2 id="patient-name" class="name">Jessica Taylor</h2>
+
+          <ul class="info">
+            <li>
+              <div class="left">
+                <img id="dob-icon" class="icon-20" alt="">
+                <span class="k">Date Of Birth</span>
+              </div>
+              <span id="patient-dob">—</span>
+            </li>
+            <li>
+              <div class="left">
+                <img id="gender-icon" class="icon-20" alt="">
+                <span class="k">Gender</span>
+              </div>
+              <span id="patient-gender">—</span>
+            </li>
+            <li>
+              <div class="left">
+                <img id="phone-icon-1" class="icon-20" alt="">
+                <span class="k">Contact info.</span>
+              </div>
+              <span id="patient-phone">—</span>
+            </li>
+            <li>
+              <div class="left">
+                <img id="phone-icon-2" class="icon-20" alt="">
+                <span class="k">Emergency Contacts</span>
+              </div>
+              <span id="patient-emergency">—</span>
+            </li>
+            <li>
+              <div class="left">
+                <img id="ins-icon" class="icon-20" alt="">
+                <span class="k">Insurance Provider</span>
+              </div>
+              <span id="patient-insurance">—</span>
+            </li>
+          </ul>
+
+          <button class="btn full" disabled>Show All Information</button>
+        </article>
+
+        <article class="card">
+          <header class="card-header">
+            <h3>Lab Results</h3>
+          </header>
+          <div class="card-body">
+            <ul id="lab-results" class="lab-list" aria-label="Lab results"></ul>
+          </div>
+        </article>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
