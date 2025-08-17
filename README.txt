@@ -1,13 +1,26 @@
-# Coalition Technologies Skills Test — Patient Dashboard (Single Page)
+# Patient Health Dashboard
 
-This submission converts the Adobe XD template into a single‑page site and fetches patient data from the Coalition Patient Data API.
-It displays **only Jessica Taylor** as requested and draws a blood pressure by year line chart using **Chart.js**.
+A front-end web application that demonstrates how patient medical data can be displayed in a clean, responsive dashboard.
 
-## How to run
-Open `index.html` in any modern browser with internet access. No build step required.
+## Features
+- Fetches and displays patient data from an API using **secure Basic Auth**.
+- Showcases a single patient profile (Jessica Taylor) with:
+  - Personal details (age, DOB, contact info, insurance)
+  - Diagnosis history
+  - Lab results
+  - Blood pressure trends via interactive **Chart.js** line chart
+- Patient list sidebar with scrollable navigation
+- Responsive layout designed for desktop and mobile
+- Accessible design with attention to semantic HTML and ARIA roles
 
-## Notes
-- The API requires **Basic Auth** with username `coalition` and password `skills-test`. The app encodes the credentials at runtime (`btoa`), rather than hard‑coding the encoded token.
-- The chart averages systolic/diastolic values per **year** using `diagnosis_history` entries from the API.
-- Only core UI from the mock is implemented (no extra interactions), per instructions.
-- Source files are unminified.
+## Tech Stack
+- **HTML5, CSS3, JavaScript (ES6)**
+- **Chart.js** for data visualization
+- API integration with Basic Auth
+- Responsive design principles
+
+## Usage
+1. Clone this repo:
+   ```bash
+   git clone https://github.com/sharris95/patient-health-dashboard.git
+   cd patient-health-dashboard
