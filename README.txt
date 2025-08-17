@@ -8,14 +8,14 @@ A front-end web application that demonstrates how patient medical data can be di
   - Personal details (age, DOB, contact info, insurance)
   - Diagnosis history
   - Lab results
-  - Blood pressure trends via interactive **Chart.js** line chart
+  - Blood pressure trends visualized using **Chart.js**
 - Patient list sidebar with scrollable navigation
 - Responsive layout designed for desktop and mobile
-- Accessible design with attention to semantic HTML and ARIA roles
+- Accessible design with semantic HTML and ARIA roles
 
 ## Tech Stack
 - **HTML5, CSS3, JavaScript (ES6)**
-- **Chart.js** for data visualization
+- **Chart.js** for interactive data visualization
 - API integration with Basic Auth
 - Responsive design principles
 
